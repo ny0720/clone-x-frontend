@@ -1,18 +1,30 @@
 <template>
-<h2>hello world hello Git</h2>
+  <div class="container">
+    <LoginPage />
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import LoginPage from "./views/LoginPage.vue";
 export default {
-  name: 'App',
-  }
-
+    name: "App",
+    components: { LoginPage },
+};
 </script>
 
 <style>
-#app {
+body{
+  background-color: black;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
-
