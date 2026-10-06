@@ -3,6 +3,7 @@ import LifeCycle from "@/views/LifeCycle.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import MainPage from "@/views/MainPage.vue";
 import SignUpPage from "@/views/SignUpPage.vue";
+import FeedList from '@/components/FeedList.vue'
 
 import { createRouter, createWebHistory } from "vue-router"
 
@@ -32,7 +33,11 @@ const router = createRouter({
         {
             path: '/main',
             component: MainPage
-        }
+        },
+        {
+            path: '/Feedlist',
+            component: FeedList
+        },
     ]
 })
 

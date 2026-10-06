@@ -1,53 +1,36 @@
 <template>
-    <div>
-        <p>index: {{ index }}</p>
-        <p>상품 가격: {{ price }}</p>
-        <p>할인율: {{ discountRate }}</p>
-        <p>최종 가격: {{ calculateFinalPrice() }}</p>
-        <div>
-            <button @click="updatePrice">updatePrice</button>
-        </div>
-        <div>
-            <button @click="updateDiscountRate">updateDiscountRate</button>
-        </div>
-        <div>
-            <button @click="updateIndex">updateIndex</button>
-        </div>
-    </div>
+  <div>
+    <button @click="removeFirstItem">Remove First Item</button>
+    <button @click="removeLastItem">Remove Last Item</button>
+    <ul>
+        <ItemComponent v-for="item in items" :key="item.id" :item="item" />
+    </ul>
+  </div>
 </template>
 
 <script>
+import ItemComponent from '@/components/ItemComponent.vue';
 export default {
     name: "DemoPage",
+    components: { ItemComponent },
     data() {
         return {
-            index: 0,
-            price: 10000,
-            discountRate: 0.1
+            items: [
+                {id: 1, name: "Apple"},
+                {id: 2, name: "Banana"},
+                {id: 3, name: "Orange"},
+                {id: 4, name: "Data"},
+                {id: 5, name: "Elderberry"},
+            ],
         };
     },
-    // computed: {
-    //     finalPrice() {
-    //         console.log("call finalPrice");
-    //         return this.price * (1 - this.discountRate);
-    //     },
-    // },
-     methods: {
-        updatePrice() {
-            this.price=this.price+1
+    methods: {
+        removeFirstItem() {
+            this.items.shift()
         },
-        updateDiscountRate() {
-            this.updateDiscountRate = this.updateDiscountRate + 0.1
+        removeLastItem() {
+            this.items.pop();
         },
-        updateIndex() {
-            this.Index = this.index+1;
-        },
-        calculateFinalPrice() {
-            console.log("calculateFinalPrice");
-            return this.price * (1 - this.discountRate);
-        },
-     },
+    },
 };
 </script>
-
-<style></style>
