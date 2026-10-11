@@ -1,18 +1,77 @@
 <template>
   <div class="tweet-bar-container">
-    <input type="text" class="input-form" placeholder="what's good, 장다미?" />
-    <!-- 트위터 아이콘 적용 -->
-    <div class="icon-circle">
-      <img src="@/assets/search.png" class="twitter-icon" alt="tweet" />
+
+    <input
+      type="text"
+      class="input-form"
+      :placeholder="userStore.placeholder"
+      v-model="content"
+    />
+
+
+    <div
+      class="icon-circle"
+      @click="createFeed"
+    >
+      <img
+        src="@/assets/search.png"
+        class="twitter-icon"
+        alt="tweet"
+      />
     </div>
+
   </div>
 </template>
 
+
 <script>
+import { useUserStore } from '@/store/user';
+import { useFeedStore } from '@/store/feed';
+
+
 export default {
-  name: "TweetBar"
+
+  name: "TweetBar",
+
+
+  data() {
+
+    return {
+
+      userStore: useUserStore(),
+
+      feedStore: useFeedStore(),
+
+      content: "",
+
+    };
+
+  },
+
+
+  methods: {
+
+    async createFeed() {
+
+      if(!this.content) {
+        return;
+      }
+
+
+      await this.feedStore.addFeed(
+        this.content
+      );
+
+
+      this.content = "";
+
+    },
+
+  },
+
 };
 </script>
+
 
 <style scoped>
 .tweet-bar-container {
@@ -49,7 +108,6 @@ export default {
 .twitter-icon {
   width: 40px;
   height: 40px;
-  /* 이미지가 흰색 새 모양일 경우 */
   object-fit: contain;
 }
 </style>

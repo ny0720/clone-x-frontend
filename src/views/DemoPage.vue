@@ -1,36 +1,44 @@
+
 <template>
   <div>
-    <button @click="removeFirstItem">Remove First Item</button>
-    <button @click="removeLastItem">Remove Last Item</button>
+    <button @click="fruitStore.removeFirstItem">
+      Remove First Item
+    </button>
+
+    <button @click="fruitStore.removeLastItem">
+      Remove Last Item
+    </button>
+
     <ul>
-        <ItemComponent v-for="item in items" :key="item.id" :item="item" />
+      <ItemComponent
+        v-for="item in fruitStore.fruitList"
+        :key="item.id"
+        :item="item"
+      />
     </ul>
+
+    <div>
+      length: {{ fruitStore.getFruitListLength }}
+    </div>
+
+    <div>
+      Fruits with 'a': {{ fruitStore.getFruitByNameWithA }}
+    </div>
   </div>
 </template>
 
 <script>
 import ItemComponent from '@/components/ItemComponent.vue';
+import { useFruitStore } from '@/store/fruit';
+
 export default {
-    name: "DemoPage",
-    components: { ItemComponent },
-    data() {
-        return {
-            items: [
-                {id: 1, name: "Apple"},
-                {id: 2, name: "Banana"},
-                {id: 3, name: "Orange"},
-                {id: 4, name: "Data"},
-                {id: 5, name: "Elderberry"},
-            ],
-        };
-    },
-    methods: {
-        removeFirstItem() {
-            this.items.shift()
-        },
-        removeLastItem() {
-            this.items.pop();
-        },
-    },
+  name: "DemoPage",
+  components: { ItemComponent },
+
+  data() {
+    return {
+      fruitStore: useFruitStore()
+    };
+  }
 };
 </script>

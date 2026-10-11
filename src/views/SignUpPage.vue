@@ -35,10 +35,14 @@
 </template>
 
 <script>
-import InputField from '@/components/InputField.vue'; 
+import InputField from '@/components/InputField.vue';
+import { api } from '@/api/axios';
+
 export default {
     name: "SignUpPage",
+
     components: { InputField },
+
     data() {
         return {
             email: "",
@@ -47,10 +51,36 @@ export default {
             passwordConfirm: "",
         };
     },
+
     computed: {
         isPasswordMatch() {
             return this.password === this.passwordConfirm;
         },
+    },
+
+    methods: {
+
+        async signUp() {
+
+            if(!this.isPasswordMatch) {
+                return;
+            }
+
+
+            await api.post(
+                "/users",
+                {
+                    email: this.email,
+                    name: this.name,
+                    password: this.password,
+                }
+            );
+
+
+            this.$router.push("/login");
+
+        },
+
     },
 };
 </script>

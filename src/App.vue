@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <router-view />
+    <vue3-confirm-dialog />
   </div>
 </template>
+
 
 <script>
 export default {
